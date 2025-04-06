@@ -1,13 +1,12 @@
 use std::env;
 use std::fs;
-use capstone::arch::x86::ArchMode;
-use goblin::Object;
-use capstone::prelude::*;
 use colored::*;
+use goblin::Object;
 
-mod elf;
-mod pe;
 mod arch;
+mod models;
+mod scanner;
+mod formatters;
 
 fn main() {
     let args: Vec<String> = env::args().collect();
@@ -33,20 +32,16 @@ fn main() {
         }
     };
 
-    let cs = Capstone::new()
-        .x86()
-        .mode(ArchMode::Mode64)
-        .build()
-        .expect("Failed to init Capstone");
-
+    let scanner = scanner::Scanner::new(&data, filter);
+    
     match Object::parse(&data) {
         Ok(Object::Elf(elf)) => {
             println!("{}", "Detected ELF file".blue().bold());
-            elf::process_elf(&data, &elf, &cs, filter);
+            scanner.scan_elf(&elf);
         }
         Ok(Object::PE(pe)) => {
             println!("{}", "Detected PE file".blue().bold());
-            pe::process_pe(&data, &pe, &cs, filter);
+            scanner.scan_pe(&pe);
         }
         Ok(_) => println!("{}", "Unsupported file type".yellow()),
         Err(e) => println!("{}", format!("Parse error: {}", e).red()),

@@ -7,21 +7,20 @@
 
 ## Features
 
-- **Multi-Format Support**: Processes ELF (Linux) and PE (Windows) binaries.
-- **x86_64 Gadget Hunting**: Finds gadgets ending in `ret` with an 8-byte lookback window.
-- **Flashy UI**: Color-coded output (green for gadgets, cyan for sections) and tabulated results via `prettytable`.
-- **Filtering**: Filter gadgets by instructions (e.g., `--filter "pop,mov"`).
-- **Parallel Processing**: Uses `rayon` to scan sections concurrently.
-- **Progress Indicator**: Spinner for long scans with `indicatif`.
-- **Unique Gadgets**: Deduplicates gadgets by instruction sequence.
+- **Multi-Format Support**: Processes ELF (Linux) and PE (Windows) binaries seamlessly.
+- **x86_64 Gadget Hunting**: Identifies gadgets ending in `ret` (opcode `0xC3`) using an 8-byte lookback window for preceding instructions.
+- **Flashy UI**: Displays color-coded output (green for gadgets, cyan for sections, yellow for warnings) and organizes results in tables with `prettytable`.
+- **Filtering**: Filters gadgets by instruction keywords (e.g., `--filter "pop,mov"`) with comma-separated patterns.
 
 ## Installation
 
 ### Prerequisites
+
 - Rust 1.70 or later (install via [rustup](https://rustup.rs/))
 - For PE support on Linux/WSL: `gcc-mingw-w64-x86-64` (cross-compiler for Windows PE binaries)
 
 On Ubuntu/WSL:
+
 ```bash
 sudo apt update
 sudo apt install gcc-mingw-w64-x86-64
@@ -34,8 +33,8 @@ gcc -m64 -o test_binary test.c # For Linux
 x86_64-w64-mingw32-gcc -o test_binary.exe test.c # For Windows
 ```
 
-
 ### Building from source
+
 ```bash
 # Build in release mode
 cargo build --release
@@ -46,6 +45,7 @@ cargo build --release
 ## Usage
 
 Basic usage:
+
 ```bash
 # Scan a Linux binary
 rop-hunter /bin/ls
@@ -67,7 +67,7 @@ rop-hunter /bin/ls --filter "pop,mov,ret"
 
 ## Example Output
 
-```
+```bash
 Scanning: /bin/ls
 Read 149080 bytes
 Detected ELF file
