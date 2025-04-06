@@ -3,7 +3,7 @@
 ![Rust](https://img.shields.io/badge/Rust-1.70+-orange.svg)
 ![License](https://img.shields.io/badge/license-MIT-blue.svg)
 
-**ROP Hunter** is a fast, colorful, and modular Return-Oriented Programming (ROP) gadget finder written in Rust. It analyzes ELF and PE binaries to extract gadgets ending in `ret`, optimized for x86_64 architecture. Built with a focus on exploit development, it combines a flashy CLI with practical features like gadget filtering, JSON export, and parallel processing.
+**ROP Hunter** is a modular Return-Oriented Programming (ROP) gadget finder written in Rust. It analyzes ELF and PE binaries to extract gadgets ending in `ret`, optimized for x86_64 architecture. Built with a focus on exploit development, it combines a flashy CLI with practical features like gadget filtering, JSON export, and parallel processing.
 
 ## Features
 
