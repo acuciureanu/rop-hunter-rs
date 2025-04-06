@@ -1,0 +1,11 @@
+[package]
+name = "rop-hunter-rs"
+version = "0.1.0"
+edition = "2024"
+
+[dependencies]
+capstone = "0.13.0"
+colored = "3.0.0"
+goblin = "0.9.3"
+memchr = "2.7.4"
+prettytable = "0.10.0"
